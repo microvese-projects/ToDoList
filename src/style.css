@@ -1,0 +1,110 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+#tile {
+  background: #fff;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 0 15px rgb(199, 199, 199);
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+#list-title {
+  font-weight: 400;
+}
+
+#reset {
+  cursor: pointer;
+  color: gray;
+}
+
+#reset:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+form label {
+  display: none;
+}
+
+#entry {
+  width: calc(100% - 45px);
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-style: italic;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.to-do-item {
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+  gap: 20px;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+}
+
+.more {
+  width: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.more:hover {
+  cursor: all-scroll;
+}
+
+.box {
+  background-color: lightgray;
+  border-radius: 50%;
+  height: 4px;
+  width: 4px;
+  margin: 3px;
+}
+
+.more:hover .box {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#clear-all {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  color: gray;
+  background: rgb(241, 240, 240);
+  cursor: pointer;
+}
+
+#clear-all p {
+  width: max-content;
+}
+
+#clear-all p:hover {
+  color: black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+}
