@@ -51,6 +51,15 @@ class Overall {
     this.displayTasks();
   }
 
+  remove(index) {
+    this.tasks.map((task) => {
+      if (task.index === index) {
+        this.tasks.splice(index, 1);
+      }
+      return task;
+    });
+  }
+
   eventListeners() {
     this.form.addEventListener('submit', (event) => {
       event.preventDefault();
