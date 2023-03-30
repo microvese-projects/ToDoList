@@ -132,3 +132,8 @@ input[type="checkbox"] {
   color: red;
   font-size: 20px;
 }
+
+.strike {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.3);
+}

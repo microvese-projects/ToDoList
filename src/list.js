@@ -19,7 +19,7 @@ class Overall {
   displayTasks() {
     this.listContainer.innerHTML = '';
     this.tasks.forEach(({
-      description,
+      description, completed,
     }, i) => {
       this.tasks[i].index = i;
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
@@ -27,8 +27,21 @@ class Overall {
       ul.className = 'to-do-item';
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
+      checkbox.checked = completed;
+      checkbox.addEventListener('change', () => {
+        if (this.tasks[i].completed) {
+          this.tasks[i].completed = false;
+        } else {
+          this.tasks[i].completed = true;
+        }
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        this.displayTasks();
+      });
       const describe = document.createElement('p');
       describe.textContent = description;
+      if (completed) {
+        describe.className = 'strike';
+      }
       describe.ondblclick = this.more.bind(this);
       const more = moreBtn();
       more.onclick = this.more.bind(this);
