@@ -16,6 +16,7 @@ class Overall {
       checkbox.setAttribute('type', 'checkbox');
       const describe = document.createElement('p');
       describe.textContent = description;
+      describe.ondblclick = this.edit;
       const more = document.createElement('div');
       more.className = 'more';
       const box = document.createElement('div');
@@ -49,6 +50,24 @@ class Overall {
 
     this.tasks.push(newTask);
     this.displayTasks();
+  }
+
+  edit() {
+    const target = this;
+    let text = this.textContent;
+    const editInput = document.createElement('input');
+    editInput.setAttribute('type', 'text');
+    editInput.value = text;
+    editInput.className = 'editInput';
+    target.parentNode.replaceChild(editInput, target);
+
+    editInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        text = editInput.value;
+        this.textContent = text;
+        editInput.parentNode.replaceChild(this, editInput);
+      }
+    });
   }
 
   remove(index) {
