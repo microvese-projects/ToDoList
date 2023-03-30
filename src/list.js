@@ -6,8 +6,6 @@ class Overall {
     this.listContainer = document.querySelector('#to-dos');
   }
 
-  #checkedMark = '<i class="fa fa-check"></i>'
-
   displayTasks() {
     this.tasks.forEach(({
       description, completed, index,
@@ -27,6 +25,7 @@ class Overall {
       });
       const describe = document.createElement('p');
       describe.textContent = description;
+      describe.ondblclick = this.edit;
       if (completed === true) {
         describe.className = 'strike';
       }
@@ -46,6 +45,24 @@ class Overall {
       ul.appendChild(more);
 
       this.listContainer.appendChild(ul);
+    });
+  }
+
+  edit() {
+    const target = this;
+    let text = this.textContent;
+    const editInput = document.createElement('input');
+    editInput.setAttribute('type', 'text');
+    editInput.value = text;
+    editInput.className = 'editInput';
+    target.parentNode.replaceChild(editInput, target);
+
+    editInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        text = editInput.value;
+        this.textContent = text;
+        editInput.parentNode.replaceChild(this, editInput);
+      }
     });
   }
 }

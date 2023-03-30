@@ -117,3 +117,14 @@ input[type="checkbox"] {
 input[type='checkbox']:checked {
   background-color:red;
 }
+
+.editInput {
+  height: 100%;
+  padding-left: 10px;
+  font-style: italic;
+  font-size: 16px;
+  border: none;
+  background-color: antiquewhite;
+  box-shadow: 0 0 3px;
+  outline-style: dashed;
+}
