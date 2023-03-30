@@ -1,3 +1,5 @@
+import moreBtn from './moreBtn.js';
+
 class Overall {
   constructor() {
     this.tasks = [];
@@ -9,25 +11,16 @@ class Overall {
     this.listContainer.innerHTML = '';
     this.tasks.forEach(({
       description,
-    }) => {
+    }, i) => {
+      this.tasks[i].index = i;
       const ul = document.createElement('li');
       ul.className = 'to-do-item';
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
       const describe = document.createElement('p');
       describe.textContent = description;
-      describe.ondblclick = this.edit;
-      const more = document.createElement('div');
-      more.className = 'more';
-      const box = document.createElement('div');
-      const box1 = document.createElement('div');
-      const box2 = document.createElement('div');
-      box.className = 'box';
-      box1.className = 'box';
-      box2.className = 'box';
-      more.appendChild(box);
-      more.appendChild(box1);
-      more.appendChild(box2);
+      describe.ondblclick = this.edit.bind(this);
+      const more = moreBtn();
       ul.appendChild(checkbox);
       ul.appendChild(describe);
       ul.appendChild(more);
@@ -37,45 +30,51 @@ class Overall {
   }
 
   add(text) {
-    function generateId() {
-      return Math.floor(Math.random() * 10000);
-    }
-
-    const newId = generateId();
     const newTask = {
       description: `${text}`,
       completed: false,
-      index: newId,
+      index: this.tasks.length,
     };
 
-    this.tasks.push(newTask);
+    this.tasks.unshift(newTask);
     this.displayTasks();
   }
 
-  edit() {
-    const target = this;
-    let text = this.textContent;
+  remove(index) {
+    this.tasks = this.tasks.filter((task) => task.index !== index);
+    this.displayTasks();
+  }
+
+  edit({
+    target,
+  }) {
+    let text = target.textContent;
     const editInput = document.createElement('input');
     editInput.setAttribute('type', 'text');
     editInput.value = text;
     editInput.className = 'editInput';
     target.parentNode.replaceChild(editInput, target);
+    const more = editInput.parentNode.lastChild;
+    const trash = document.createElement('i');
+    trash.className = 'fa fa-trash trash';
+    more.parentNode.replaceChild(trash, more);
+    trash.addEventListener('click', (e) => {
+      const tasks = document.querySelectorAll('li');
+      tasks.forEach((task, index) => {
+        if (task === e.target.parentNode) {
+          this.remove(index);
+        }
+      });
+    });
 
     editInput.addEventListener('keyup', (e) => {
       if (e.key === 'Enter') {
         text = editInput.value;
-        this.textContent = text;
-        editInput.parentNode.replaceChild(this, editInput);
+        target.textContent = text;
+        editInput.parentNode.replaceChild(target, editInput);
+        const more = moreBtn();
+        trash.parentNode.replaceChild(more, trash);
       }
-    });
-  }
-
-  remove(index) {
-    this.tasks.map((task) => {
-      if (task.index === index) {
-        this.tasks.splice(index, 1);
-      }
-      return task;
     });
   }
 
