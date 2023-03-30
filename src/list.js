@@ -50,6 +50,20 @@ class Overall {
     this.tasks.push(newTask);
     this.displayTasks();
   }
+
+  eventListeners() {
+    this.form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = this.form.lastElementChild;
+      input.addEventListener('keyup', (e) => {
+        const text = input.value;
+        if (e.key === 'Enter' && text !== '') {
+          this.add(text);
+          this.form.reset();
+        }
+      });
+    });
+  }
 }
 
 export default Overall;
