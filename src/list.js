@@ -34,6 +34,22 @@ class Overall {
       this.listContainer.appendChild(ul);
     });
   }
+
+  add(text) {
+    function generateId() {
+      return Math.floor(Math.random() * 10000);
+    }
+
+    const newId = generateId();
+    const newTask = {
+      description: `${text}`,
+      completed: false,
+      index: newId,
+    };
+
+    this.tasks.push(newTask);
+    this.displayTasks();
+  }
 }
 
 export default Overall;
