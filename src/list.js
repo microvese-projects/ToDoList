@@ -1,8 +1,8 @@
 import status from './status.js';
 
 class Overall {
-  constructor(tasks) {
-    this.tasks = tasks;
+  constructor() {
+    this.tasks = [];
     this.listContainer = document.querySelector('#to-dos');
     this.form = document.querySelector('form');
   }

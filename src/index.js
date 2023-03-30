@@ -1,21 +1,16 @@
 import Overall from './list.js';
 import './style.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import clearAll from './clearAll.js';
 
-const tasks = [
-  {
-    description: 'Take out trash.',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'Cook lunch.',
-    completed: false,
-    index: 1,
-  },
-];
+const clearAllBtn = document.querySelector('#clear-all');
 
-const list = new Overall(tasks);
+const list = new Overall();
 
 list.eventListeners();
 list.displayTasks();
+clearAllBtn.addEventListener('click', () => {
+  list.tasks = clearAll(list.tasks);
+  console.log(list.tasks)
+  list.displayTasks();
+});
