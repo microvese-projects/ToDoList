@@ -1,14 +1,17 @@
 import status from './status.js';
+import clearAll from './clearAll.js';
 
 class Overall {
   constructor() {
     this.tasks = [];
     this.listContainer = document.querySelector('#to-dos');
     this.form = document.querySelector('form');
+    this.clearAllBtn = document.querySelector('#clear-all');
   }
 
   displayTasks() {
-    this.tasks.forEach(({
+    this.listContainer.innerHTML = '';
+    this.tasks?.forEach(({
       description, completed, index,
     }) => {
       const ul = document.createElement('li');
@@ -21,7 +24,6 @@ class Overall {
       checkbox.addEventListener('change', () => {
         const response = status(this.tasks, index);
         this.tasks = response;
-        this.listContainer.innerHTML = '';
         this.displayTasks();
       });
       const describe = document.createElement('p');
@@ -68,14 +70,18 @@ class Overall {
   }
 
   add(text) {
+    function generateId() {
+      return Math.floor(Math.random() * 10000);
+    }
+
+    const newId = generateId();
     const newTask = {
       description: `${text}`,
       completed: false,
-      index: 0,
+      index: newId,
     };
 
     this.tasks.push(newTask);
-    this.listContainer.innerHTML = '';
     this.displayTasks();
   }
 
@@ -90,6 +96,10 @@ class Overall {
           this.form.reset();
         }
       });
+    });
+    this.clearAllBtn.addEventListener('click', () => {
+      this.tasks = clearAll(this.tasks);
+      this.displayTasks();
     });
   }
 }
