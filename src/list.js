@@ -19,8 +19,9 @@ class Overall {
       checkbox.setAttribute('type', 'checkbox');
       const describe = document.createElement('p');
       describe.textContent = description;
-      describe.ondblclick = this.edit.bind(this);
+      describe.ondblclick = this.more.bind(this);
       const more = moreBtn();
+      more.onclick = this.more.bind(this);
       ul.appendChild(checkbox);
       ul.appendChild(describe);
       ul.appendChild(more);
@@ -45,9 +46,12 @@ class Overall {
     this.displayTasks();
   }
 
-  edit({
-    target,
-  }) {
+  more(e) {
+    const target = e.target.parentNode.childNodes[1];
+    this.edit(target);
+  }
+
+  edit(target) {
     let text = target.textContent;
     const editInput = document.createElement('input');
     editInput.setAttribute('type', 'text');
@@ -73,6 +77,7 @@ class Overall {
         target.textContent = text;
         editInput.parentNode.replaceChild(target, editInput);
         const more = moreBtn();
+        more.addEventListener('click', this.more.bind(this));
         trash.parentNode.replaceChild(more, trash);
       }
     });
