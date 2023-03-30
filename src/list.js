@@ -4,6 +4,7 @@ class Overall {
   constructor(tasks) {
     this.tasks = tasks;
     this.listContainer = document.querySelector('#to-dos');
+    this.form = document.querySelector('form');
   }
 
   displayTasks() {
@@ -63,6 +64,32 @@ class Overall {
         this.textContent = text;
         editInput.parentNode.replaceChild(this, editInput);
       }
+    });
+  }
+
+  add(text) {
+    const newTask = {
+      description: `${text}`,
+      completed: false,
+      index: 0,
+    };
+
+    this.tasks.push(newTask);
+    this.listContainer.innerHTML = '';
+    this.displayTasks();
+  }
+
+  eventListeners() {
+    this.form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = this.form.lastElementChild;
+      input.addEventListener('keyup', (e) => {
+        const text = input.value;
+        if (e.key === 'Enter' && text !== '') {
+          this.add(text);
+          this.form.reset();
+        }
+      });
     });
   }
 }

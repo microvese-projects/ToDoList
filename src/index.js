@@ -13,18 +13,9 @@ const tasks = [
     completed: false,
     index: 1,
   },
-  {
-    description: 'Clean the house.',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Submit the project.',
-    completed: false,
-    index: 3,
-  },
 ];
 
 const list = new Overall(tasks);
 
+list.eventListeners();
 list.displayTasks();

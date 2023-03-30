@@ -115,7 +115,7 @@ input[type="checkbox"] {
 }
 
 input[type='checkbox']:checked {
-  background-color:red;
+  background-color: red;
 }
 
 .editInput {
