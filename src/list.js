@@ -7,12 +7,22 @@ class Overall {
     this.form = document.querySelector('form');
   }
 
+  setLocalStorage() {
+    const toDos = localStorage.getItem('tasks');
+    if (toDos) {
+      this.tasks = JSON.parse(toDos);
+    } else {
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    }
+  }
+
   displayTasks() {
     this.listContainer.innerHTML = '';
     this.tasks.forEach(({
       description,
     }, i) => {
       this.tasks[i].index = i;
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
       const ul = document.createElement('li');
       ul.className = 'to-do-item';
       const checkbox = document.createElement('input');
@@ -38,20 +48,30 @@ class Overall {
     };
 
     this.tasks.unshift(newTask);
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
     this.displayTasks();
   }
 
   remove(index) {
     this.tasks = this.tasks.filter((task) => task.index !== index);
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
     this.displayTasks();
   }
 
   more(e) {
-    const target = e.target.parentNode.childNodes[1];
-    this.edit(target);
+    const parent = e.target.parentNode;
+    const target = parent.childNodes[1];
+    const list = Array.from(this.listContainer.childNodes);
+    let targetIndex;
+    list.forEach((each, index) => {
+      if (each === parent) {
+        targetIndex = index;
+      }
+    });
+    this.edit(target, targetIndex);
   }
 
-  edit(target) {
+  edit(target, index) {
     let text = target.textContent;
     const editInput = document.createElement('input');
     editInput.setAttribute('type', 'text');
@@ -74,6 +94,8 @@ class Overall {
     editInput.addEventListener('keyup', (e) => {
       if (e.key === 'Enter') {
         text = editInput.value;
+        this.tasks[index].description = text;
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
         target.textContent = text;
         editInput.parentNode.replaceChild(target, editInput);
         const more = moreBtn();
