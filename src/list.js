@@ -24,7 +24,7 @@ class Overall {
     this.tasks.forEach(({
       description, completed,
     }, i) => {
-      this.tasks[i].index = i;
+      this.tasks[i].index = this.tasks.length - i;
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
       const ul = document.createElement('li');
       ul.className = 'to-do-item';
@@ -102,7 +102,7 @@ class Overall {
       const tasks = document.querySelectorAll('li');
       tasks.forEach((task, index) => {
         if (task === e.target.parentNode) {
-          this.remove(index);
+          this.remove(this.tasks.length - index);
         }
       });
     });
