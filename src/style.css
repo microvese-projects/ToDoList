@@ -108,3 +108,32 @@ input[type="checkbox"] {
   color: black;
   border-bottom: 1px solid rgba(0, 0, 0, 0.8);
 }
+
+.editInput {
+  height: 100%;
+  padding-left: 10px;
+  font-style: italic;
+  font-size: 16px;
+  border: none;
+  background-color: antiquewhite;
+  box-shadow: 0 0 3px;
+  outline-style: dashed;
+}
+
+.trash {
+  color: rgba(255, 0, 0, 0.5);
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.05s ease-in-out;
+}
+
+.trash:hover {
+  color: red;
+  font-size: 20px;
+}
+
+.strike {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.3);
+}
