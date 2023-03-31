@@ -1,10 +1,12 @@
 import moreBtn from './moreBtn.js';
+import clearAll from './clearAll.js';
 
 class Overall {
   constructor() {
     this.tasks = [];
     this.listContainer = document.querySelector('#to-dos');
     this.form = document.querySelector('form');
+    this.clearAllBtn = document.querySelector('#clear-all');
   }
 
   setLocalStorage() {
@@ -129,6 +131,11 @@ class Overall {
           this.form.reset();
         }
       });
+    });
+    this.clearAllBtn.addEventListener('click', () => {
+      this.tasks = clearAll(this.tasks);
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.displayTasks();
     });
   }
 }
