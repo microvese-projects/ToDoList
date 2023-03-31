@@ -7,6 +7,7 @@ class Overall {
     this.listContainer = document.querySelector('#to-dos');
     this.form = document.querySelector('form');
     this.clearAllBtn = document.querySelector('#clear-all');
+    this.resync = document.querySelector('#reset');
   }
 
   setLocalStorage() {
@@ -136,6 +137,13 @@ class Overall {
       this.tasks = clearAll(this.tasks);
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
       this.displayTasks();
+    });
+    this.resync.addEventListener('click', () => {
+      this.tasks = [];
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.displayTasks();
+      this.resync.classList.add('rotate');
+      setTimeout(() => this.resync.classList.remove('rotate'), 1500)
     });
   }
 }
