@@ -1,10 +1,13 @@
 import moreBtn from './moreBtn.js';
+import clearAll from './clearAll.js';
 
 class Overall {
   constructor() {
     this.tasks = [];
     this.listContainer = document.querySelector('#to-dos');
     this.form = document.querySelector('form');
+    this.clearAllBtn = document.querySelector('#clear-all p');
+    this.resync = document.querySelector('#reset');
   }
 
   setLocalStorage() {
@@ -21,7 +24,7 @@ class Overall {
     this.tasks.forEach(({
       description, completed,
     }, i) => {
-      this.tasks[i].index = i;
+      this.tasks[i].index = this.tasks.length - i;
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
       const ul = document.createElement('li');
       ul.className = 'to-do-item';
@@ -99,7 +102,7 @@ class Overall {
       const tasks = document.querySelectorAll('li');
       tasks.forEach((task, index) => {
         if (task === e.target.parentNode) {
-          this.remove(index);
+          this.remove(this.tasks.length - index);
         }
       });
     });
@@ -129,6 +132,18 @@ class Overall {
           this.form.reset();
         }
       });
+    });
+    this.clearAllBtn.addEventListener('click', () => {
+      this.tasks = clearAll(this.tasks);
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.displayTasks();
+    });
+    this.resync.addEventListener('click', () => {
+      this.tasks = [];
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.displayTasks();
+      this.resync.classList.add('rotate');
+      setTimeout(() => this.resync.classList.remove('rotate'), 1500);
     });
   }
 }
