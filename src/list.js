@@ -6,7 +6,7 @@ class Overall {
     this.tasks = [];
     this.listContainer = document.querySelector('#to-dos');
     this.form = document.querySelector('form');
-    this.clearAllBtn = document.querySelector('#clear-all');
+    this.clearAllBtn = document.querySelector('#clear-all p');
     this.resync = document.querySelector('#reset');
   }
 
@@ -143,7 +143,7 @@ class Overall {
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
       this.displayTasks();
       this.resync.classList.add('rotate');
-      setTimeout(() => this.resync.classList.remove('rotate'), 1500)
+      setTimeout(() => this.resync.classList.remove('rotate'), 1500);
     });
   }
 }
