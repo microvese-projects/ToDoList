@@ -4,6 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
+    "test": "jest",
     "deploy": "gh-pages -d dist",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
@@ -12,7 +13,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "homepage": "https://microverse-projects.github.io/ToDoList",
+  "homepage": "https://microverse-projects.github.io/ToDoList/",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.7.3",
@@ -21,6 +22,7 @@
     "eslint-plugin-import": "^2.27.5",
     "hint": "^7.1.7",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.5.0",
     "style-loader": "^3.3.2",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
